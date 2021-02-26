@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>ProMan</title>
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+        <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    </head>
+    <body>
+        <div id="square" style="height: 100px;background-color: black;">
+        </div>
+        <h1>ProMan</h1>
+        <div id="boards">Boards are loading...</div>
+    </body>
+    <script>
+            let start = new Date()
+            function getElapsedTime() {
+                let difference = new Date() - start
+                let remainder = Math.floor(difference / 10)
+                let amount = 1
+                while (remainder > 0) {
+                    remainder = Math.floor(remainder / 10)
+                    amount++
+                }
+                let result = difference.toString()
+                for (let i=amount; i < 8; i++) {
+                    result = " " + result
+                }
+                return result + " -"
+            }
+            console.log(getElapsedTime(), "First <script>")
+
+            let element = document.getElementById("square")
+            let repeat = setInterval(() => {
+                try {
+                    if (element.style.backgroundColor === "black") {
+                        element.style.backgroundColor = "red"
+                    } else {
+                        element.style.backgroundColor = "black"
+                    }
+                } catch {
+                    clearInterval(repeat)
+                }
+            }, 500);
+    </script>
+</html>

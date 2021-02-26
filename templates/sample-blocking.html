@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blocking</title>
+    <style>
+        #square {
+            height: 100px;
+            background-color: black;
+        } 
+    </style>
+</head>
+<body>
+    <div id="square">
+    </div>
+    <div>
+        <button onclick="blocking()">Click me to generate a block</button>
+    </div>
+</body>
+<script defer>
+        function blocking() {
+            let quick = 1000
+            let slow = 3000000000
+            console.log("start long executing function")
+            let result = 0
+            for (let i=0; i<slow; i++) {
+                result += i*i
+            }
+            console.log("end long executing function with result:", result)
+        }
+
+        let element = document.getElementById("square")
+        setInterval(() => {
+            if (element.style.backgroundColor === "black") {
+                element.style.backgroundColor = "red"
+            } else {
+                element.style.backgroundColor = "black"
+            }
+        }, 500);
+    </script>
+</html>
