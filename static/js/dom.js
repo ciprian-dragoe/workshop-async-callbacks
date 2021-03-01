@@ -1,5 +1,6 @@
 // It uses data_handler.js to visualize elements
 import { dataHandler } from "./data_handler.js";
+import { generateBoard } from './htmlGenerator.js'
 
 export let dom = {
     init: function () {
@@ -20,10 +21,9 @@ export let dom = {
         let boardsContainer = document.querySelector('#boards');
 
         for(let board of boards) {
-            let newBoard = `
-                <li>${board.title}</li><button id="board-${board.id}">add card</button>
-            `;
-            boardsContainer.innerHTML += newBoard
+            let newBoard = generateBoard(board)
+            boardsContainer.innerHTML += newBoard // purposely mistaken
+            // boardsContainer.insertAdjacentHTML("beforeend", newBoard)
             document.getElementById(`board-${board.id}`).addEventListener("click", () => {
                 console.log(`add card for board with id: ${board.id}`)
             })

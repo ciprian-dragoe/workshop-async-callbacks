@@ -3,6 +3,10 @@
 
 // (watch out: when you would like to use a property/function of an object from the
 // object itself then you must use the 'this' keyword before. For example: 'this._data' below)
+let myVariable = {
+    _data: {},
+    _api_get: 24
+}
 
 export let dataHandler = {
     _data: {}, // it is a "cache for all data received: boards, cards and statuses. It is not accessed from outside.
@@ -11,10 +15,10 @@ export let dataHandler = {
         // loads data from API, parses it and calls the callback with it
         console.log(getElapsedTime(), "[_api_get] start of function")
         console.log(getElapsedTime(), "[_api_get] parameter (url):")
-        console.log(callback)
+        console.log(url)
         console.log(getElapsedTime(), "[_api_get] parameter (callback):")
         console.log(Function.prototype.toString.call(callback))
-        console.log("getElapsedTime(), [_api_get] start async fetch")
+        console.log(getElapsedTime(), "[_api_get] start async fetch")
         fetch(url, {
             method: 'GET',
             credentials: 'same-origin'
@@ -22,6 +26,9 @@ export let dataHandler = {
         .then(response => {
             console.log(getElapsedTime(), "[_api_get] async 1st response")
             console.log(response)
+            if (response.status !== 200) {
+                alert("server is too busy")
+            }
             return response.json()
         })  // parse the response as JSON
         .then(json_response => {
